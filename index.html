@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnMoreAboutAcosta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --dark: #0f1419;
+            --dark-light: #1a1f2e;
+            --text: #e4e6eb;
+            --text-secondary: #b0b3b8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Simplified background - much lighter */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1f2e 100%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 50px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.4);
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section */
+        section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--dark-light);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Achievements */
+        .achievements-highlight {
+            background: linear-gradient(135deg, rgba(240, 147, 251, 0.1), rgba(245, 87, 108, 0.1));
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: var(--dark-light);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            width: calc(50% - 40px);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border: 4px solid var(--dark);
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Client Cards */
+        .client-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .client-card {
+            background: var(--dark-light);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .client-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .client-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .client-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .client-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .client-link:hover {
+            color: var(--accent);
+        }
+
+        .client-link::after {
+            content: ' →';
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-badge {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border: 1px solid var(--primary);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .skill-badge:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: scale(1.05);
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: var(--dark-light);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-light);
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 9999;
+            width: 0%;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">AA</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#clients">Clients</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <img src="data:image/jpeg;base64,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" alt="Alexander Acosta" class="profile-image">
+            <h1>Alexander Acosta</h1>
+            <p class="tagline">Sales Leader • Creative Collaborator • Lifelong Learner</p>
+            <p class="subtitle">
+                Transforming complex technical sales into long-term partnerships. 
+                261% quota crusher now bridging business and technology through continuous learning.
+            </p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="#achievements" class="btn btn-secondary">See My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <p class="section-subtitle">
+                High-performing sales professional with 4 years of experience in B2B SaaS, 
+                cloud computing, and cybersecurity. Now building technical skills to create even bigger impact.
+            </p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">261%</span>
+                    <span class="stat-label">Peak Quota Attainment</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Whale Wins in 3 Years</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">$300K+</span>
+                    <span class="stat-label">Average Whale Win ACV</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Customer Case Studies</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <div class="container">
+            <h2 class="section-title">Key Achievements</h2>
+            <p class="section-subtitle">
+                Not just closing deals—creating partnerships and consistently exceeding expectations
+            </p>
+
+            <div class="achievements-highlight">
+                <h3 style="color: var(--accent); font-size: 2rem; margin-bottom: 1.5rem; text-align: center;">
+                    🏆 Elite Performance at Fastly
+                </h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">2-6x</span>
+                        <span class="stat-label">Above Average Deal Size</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">45-90</span>
+                        <span class="stat-label">Day Sales Cycles</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">Avg POC Conversion Rate</span>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 2rem; color: var(--text-secondary); font-size: 1.1rem;">
+                    Led team annually by consistently landing deals 2-6x larger than the typical $35K-$150K SMB range—
+                    proving ability to identify and close outlier opportunities in a competitive segment.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Career Journey</h2>
+            <p class="section-subtitle">
+                Building relationships and driving results across diverse industries
+            </p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3 style="color: var(--primary); margin-bottom: 0.5rem;">SMB Account Executive</h3>
+                        <p style="color: var(--accent); margin-bottom: 1rem;">Fastly • Apr 2022 - Nov 2025</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            Led technical sales for CDN, WAF, and Compute@Edge solutions. Pod Quota Leader 2022-2023 with 261% and 119% attainment.
+                        </p>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+                            <li>Managed end-to-end sales from discovery to C-Suite closure</li>
+                            <li>Closed $35K-$150K ARR deals in 45-90 day cycles</li>
+                            <li>Secured 4 whale wins with $300K+ ACVs</li>
+                            <li>Developed marketing materials and customer case studies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Account Executive</h3>
+                        <p style="color: var(--accent); margin-bottom: 1rem;">Internet Brands • Mar 2021 - Dec 2021</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            Drove new business development through strategic sales initiatives.
+                        </p>
+                        <ul style="color: var(--text-secondary); margin-left: 1.5rem;">
+                            <li>Built relationships with new and existing accounts</li>
+                            <li>Managed full sales cycle from prospecting to close</li>
+                            <li>Exceeded revenue growth targets</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Creative Assistant</h3>
+                        <p style="color: var(--accent); margin-bottom: 1rem;">Burdview • Ongoing</p>
+                        <p style="color: var(--text-secondary);">
+                            Collaborate on marketing campaigns with Atlanta-based videographer. Worked with Young Thug, 
+                            Gunna, Lil Gotit, and Lil Keed on videos surpassing 1M+ YouTube views.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="clients">
+        <div class="container">
+            <h2 class="section-title">Client Success Stories</h2>
+            <p class="section-subtitle">
+                Turning customers into partners through trust, results, and collaboration
+            </p>
+
+            <div class="client-grid">
+                <div class="client-card">
+                    <h3>Anchor</h3>
+                    <p>Podcast hosting platform leveraging Fastly's edge computing for seamless content delivery to millions of creators.</p>
+                    <a href="https://www.fastly.com/customers/anchor" target="_blank" class="client-link">View Case Study</a>
+                </div>
+
+                <div class="client-card">
+                    <h3>Bitwarden</h3>
+                    <p>Password management solution built on Fastly's infrastructure for security and scalability at enterprise level.</p>
+                    <a href="https://bitwarden.com/blog/the-bitwarden-tech-stack-built-for-security-and-scalability/" target="_blank" class="client-link">Read Tech Stack</a>
+                </div>
+
+                <div class="client-card">
+                    <h3>Watch Duty</h3>
+                    <p>Wildfire tracking app using Fastly's CDN to deliver critical real-time alerts during emergencies.</p>
+                    <a href="https://www.fastly.com/customers/watch-duty" target="_blank" class="client-link">View Case Study</a>
+                </div>
+
+                <div class="client-card">
+                    <h3>Confident Security</h3>
+                    <p>AI security startup that emerged from stealth with $4.2M funding, powered by Fastly's edge platform.</p>
+                    <a href="https://techcrunch.com/2025/07/17/confident-security-the-signal-for-ai-comes-out-of-stealth-with-4-2m/" target="_blank" class="client-link">Read TechCrunch</a>
+                </div>
+
+                <div class="client-card">
+                    <h3>Hoodoo Digital</h3>
+                    <p>Digital agency optimizing web performance and security with Fastly's edge cloud platform.</p>
+                    <a href="https://www.fastly.com/customers/hoodoo" target="_blank" class="client-link">View Case Study</a>
+                </div>
+
+                <div class="client-card">
+                    <h3>RealtyNinja</h3>
+                    <p>Real estate website platform delivering fast, reliable experiences for agents and home buyers.</p>
+                    <a href="https://www.fastly.com/customers/realtyninja" target="_blank" class="client-link">View Case Study</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <p class="section-subtitle">
+                Blending technical sales mastery with emerging development capabilities
+            </p>
+
+            <div class="skills-grid">
+                <div class="skill-badge">B2B SaaS Sales</div>
+                <div class="skill-badge">Cloud Computing</div>
+                <div class="skill-badge">Cybersecurity</div>
+                <div class="skill-badge">Technical Sales</div>
+                <div class="skill-badge">Salesforce</div>
+                <div class="skill-badge">Looker</div>
+                <div class="skill-badge">Tableau</div>
+                <div class="skill-badge">HTML & CSS</div>
+                <div class="skill-badge">JavaScript</div>
+                <div class="skill-badge">Marketing</div>
+                <div class="skill-badge">Content Creation</div>
+                <div class="skill-badge">Relationship Building</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="section-subtitle">
+                Interested in leadership opportunities that combine sales expertise with technical capabilities
+            </p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <a href="mailto:alex.acosta211@gmail.com">alex.acosta211@gmail.com</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <h3>LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/alexander-acosta" target="_blank">Connect with me</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>Phone</h3>
+                    <a href="tel:+15625229694">+1 (562) 522-9694</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Built with HTML, CSS & JavaScript • Designed by Alexander Acosta</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">© 2026 Alexander Acosta. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simplified scroll progress
+        window.addEventListener('scroll', function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        }, { passive: true });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
